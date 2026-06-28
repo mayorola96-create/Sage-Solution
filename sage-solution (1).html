@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sage Solution — Premium Shopify Growth Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --bg-primary: #050505;
+    --bg-secondary: #0D0D0D;
+    --bg-card: #151515;
+    --border: #2A2A2A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --blue: #3B82F6;
+    --emerald: #10B981;
+    --gold: #F59E0B;
+    --green-star: #87f502;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg-primary); color: var(--text-primary); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+  /* ===== TOP BANNER ===== */
+  #top-banner {
+    background: #000;
+    border-bottom: 1px solid rgba(59,130,246,0.3);
+    box-shadow: 0 1px 20px rgba(59,130,246,0.15);
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    z-index: 100;
+  }
+  #top-banner img { height: 42px; object-fit: contain; }
+  .banner-shopify-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px;
+    color: var(--blue); font-weight: 600; letter-spacing: 0.5px;
+    vertical-align: middle; margin-left: 16px;
+  }
+  .banner-inner { display: flex; align-items: center; justify-content: center; gap: 0; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 47px; left:0; right:0; z-index: 999;
+    padding: 0 5%;
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(5,5,5,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    top: 0;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo img { height: 36px; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-secondary); text-decoration: none;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.3px;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after {
+    content:''; position: absolute; bottom:-4px; left:0; right:0;
+    height: 2px; background: var(--blue); transform: scaleX(0);
+    transition: transform 0.2s; border-radius: 1px;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: #fff; border: none; padding: 10px 22px;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s; box-shadow: 0 0 20px rgba(59,130,246,0.3);
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(59,130,246,0.5); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 1px; transition: all 0.3s; }
+
+  /* ===== SECTION WRAPPER ===== */
+  section { padding: 100px 5%; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 14px; display: block;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; line-height: 1.1; margin-bottom: 16px;
+  }
+  .section-sub { color: var(--text-secondary); font-size: 17px; line-height: 1.7; max-width: 620px; }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--emerald) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding-top: 130px; padding-bottom: 60px;
+    background: radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(16,185,129,0.05) 0%, transparent 50%),
+                var(--bg-primary);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content:''; position:absolute; inset:0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: center; max-width: 1280px; margin: 0 auto; width: 100%;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 50px; padding: 6px 16px; font-size: 12px; font-weight: 600;
+    color: var(--blue); margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .hero-tag .dot { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+  .hero-h1 {
+    font-family: 'Syne', sans-serif; font-size: clamp(38px, 4.5vw, 64px);
+    font-weight: 800; line-height: 1.08; margin-bottom: 22px;
+  }
+  .hero-sub {
+    font-size: 18px; color: var(--text-secondary); line-height: 1.75;
+    margin-bottom: 36px; max-width: 500px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--emerald), #059669);
+    color: #fff; padding: 14px 28px; border-radius: 10px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s; box-shadow: 0 0 30px rgba(16,185,129,0.25);
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(16,185,129,0.4); }
+  .btn-secondary {
+    background: transparent; color: #fff; padding: 14px 28px;
+    border-radius: 10px; font-size: 14px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border); transition: all 0.25s; cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); background: rgba(59,130,246,0.05); }
+  .trust-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+  .badge {
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px; font-size: 12px;
+    color: var(--text-secondary); font-weight: 500;
+  }
+  .badge svg { color: var(--emerald); }
+
+  /* ===== HERO DASHBOARD ===== */
+  .hero-dashboard {
+    position: relative; background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 24px; box-shadow: 0 0 60px rgba(59,130,246,0.08);
+    overflow: hidden;
+  }
+  .hero-dashboard::before {
+    content: ''; position:absolute; top:-1px; left:20%; right:20%;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  }
+  .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .dash-title { font-size: 13px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; }
+  .dash-live { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--emerald); font-weight: 600; }
+  .dash-live::before { content:''; width:7px; height:7px; background:var(--emerald); border-radius:50%; animation: live 1.5s infinite; display:block; }
+  @keyframes live { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+  .kpi-card {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px;
+  }
+  .kpi-label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .kpi-val { font-size: 22px; font-weight: 800; font-family: 'Syne', sans-serif; }
+  .kpi-change { font-size: 11px; margin-top: 3px; }
+  .up { color: var(--emerald); }
+  .down { color: #ef4444; }
+  .chart-area { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+  .chart-title { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; font-weight: 600; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; }
+  .bar { flex: 1; border-radius: 4px 4px 0 0; transition: all 0.3s; }
+  .bar:hover { opacity: 0.8; }
+  .bar-labels { display: flex; gap: 6px; margin-top: 4px; }
+  .bar-label { flex: 1; font-size: 9px; color: var(--text-secondary); text-align: center; }
+  .conversion-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .conv-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .conv-metric { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+  .conv-val { font-size: 18px; font-weight: 800; }
+  .mini-progress { background: rgba(255,255,255,0.08); border-radius: 4px; height: 4px; margin-top: 8px; overflow: hidden; }
+  .mini-bar { height: 100%; border-radius: 4px; }
+
+  /* ===== ABOUT ===== */
+  #about { background: var(--bg-secondary); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-img-collage { position: relative; }
+  .collage-main {
+    border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+  .collage-main img { width: 100%; height: 280px; object-fit: cover; display: block; }
+  .collage-sub { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .collage-sub img { width: 100%; height: 130px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); }
+  .about-stats { display: flex; gap: 30px; margin: 30px 0; }
+  .astat { border-left: 2px solid var(--blue); padding-left: 16px; }
+  .astat-val { font-size: 32px; font-weight: 800; font-family: 'Syne', sans-serif; color: var(--blue); }
+  .astat-lbl { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .about-text { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+
+  /* ===== SKILLS ===== */
+  #skills { background: var(--bg-primary); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .skill-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px; display: flex; align-items: center;
+    gap: 14px; transition: all 0.25s; cursor: default;
+  }
+  .skill-card:hover {
+    border-color: var(--blue); background: rgba(59,130,246,0.05);
+    transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.1);
+  }
+  .skill-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .skill-name { font-size: 14px; font-weight: 600; }
+  .hidden-skill { display: none; }
+  .show-more-btn {
+    margin: 30px auto 0; display: block; width: fit-content;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--blue); padding: 12px 32px; border-radius: 50px;
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .show-more-btn:hover { border-color: var(--blue); background: rgba(59,130,246,0.08); }
+
+  /* ===== METRICS ===== */
+  #metrics {
+    background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(16,185,129,0.05));
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .metrics-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; }
+  .metric-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 20px; text-align: center;
+    transition: all 0.25s; position: relative; overflow: hidden;
+  }
+  .metric-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, var(--blue), var(--emerald));
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .metric-card:hover::before { transform: scaleX(1); }
+  .metric-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); border-color: rgba(59,130,246,0.3); }
+  .metric-icon { font-size: 30px; margin-bottom: 12px; }
+  .metric-val {
+    font-family: 'Syne', sans-serif; font-size: 36px;
+    font-weight: 800; margin-bottom: 6px;
+    background: linear-gradient(135deg, #fff, var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .metric-lbl { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+  /* ===== SERVICES ===== */
+  #services { background: var(--bg-secondary); }
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 40px; }
+  .service-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; transition: all 0.3s;
+  }
+  .service-card:hover {
+    border-color: rgba(59,130,246,0.4); transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .service-img { width: 100%; height: 170px; object-fit: cover; display: block; background: #111; }
+  .service-body { padding: 20px; }
+  .service-icon-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .service-ico { font-size: 24px; }
+  .service-experts {
+    font-size: 10px; color: var(--text-secondary); background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px;
+  }
+  .service-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .service-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+  .service-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); }
+  .service-price { font-size: 16px; font-weight: 800; color: var(--emerald); }
+  .consult-badge {
+    font-size: 9px; color: var(--blue); background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.2); border-radius: 4px; padding: 3px 7px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* ===== SUCCESS RATING ===== */
+  #rating { background: var(--bg-primary); }
+  .rating-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 30px; margin-top: 50px; }
+  .rating-item { text-align: center; }
+  .circle-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 16px; }
+  .circle-bg, .circle-fg { fill: none; stroke-width: 8; }
+  .circle-bg { stroke: rgba(255,255,255,0.05); }
+  .circle-fg { stroke-linecap: round; transition: stroke-dashoffset 1.5s ease; transform: rotate(-90deg); transform-origin: center; }
+  .circle-pct { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; font-family:'Syne',sans-serif; }
+  .rating-label { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .rating-sub { font-size: 12px; color: var(--text-secondary); }
+
+  /* ===== REVIEWS ===== */
+  #reviews { background: var(--bg-secondary); overflow: hidden; }
+  .reviews-track-wrap { overflow-x: auto; scrollbar-width: none; margin-top: 40px; cursor: grab; }
+  .reviews-track-wrap::-webkit-scrollbar { display: none; }
+  .reviews-track { display: flex; gap: 16px; padding: 10px 4px; width: max-content; }
+  .review-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 22px; width: 320px; flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .review-card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-2px); }
+  .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .review-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--emerald));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; flex-shrink: 0; color: #fff;
+    object-fit: cover;
+  }
+  img.review-avatar { font-size: 0; }
+  .review-info { flex: 1; }
+  .review-name { font-size: 14px; font-weight: 700; }
+  .review-meta { font-size: 11px; color: var(--text-secondary); margin-top: 2px; display: flex; align-items: center; gap: 6px; }
+  .review-stars { color: #F59E0B; font-size: 12px; margin-bottom: 10px; }
+  .review-service {
+    font-size: 10px; background: rgba(16,185,129,0.1); color: var(--emerald);
+    border: 1px solid rgba(16,185,129,0.2); border-radius: 4px;
+    padding: 3px 8px; display: inline-block; margin-bottom: 10px; font-weight: 600;
+  }
+  .review-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+  .write-review-btn {
+    margin-top: 30px; background: transparent; border: 1px solid var(--blue);
+    color: var(--blue); padding: 12px 28px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .write-review-btn:hover { background: rgba(59,130,246,0.1); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 10000; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    padding: 20px; backdrop-filter: blur(8px);
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-box {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 20px; width: 100%; max-width: 560px;
+    max-height: 90vh; overflow-y: auto; padding: 32px;
+    transform: translateY(20px); transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal-box { transform: translateY(0); }
+  .modal-title { font-family:'Syne',sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+  .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1/-1; }
+  .form-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; color: #fff;
+    font-size: 14px; outline: none; transition: border-color 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue); }
+  .form-select { background-color: #151515; }
+  .form-textarea { min-height: 90px; resize: vertical; }
+  .star-input { display: flex; gap: 6px; font-size: 24px; cursor: pointer; }
+  .star-input span { color: #333; transition: color 0.1s; }
+  .star-input span.active { color: var(--gold); }
+  .form-check { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary); cursor: pointer; }
+  .form-check input { accent-color: var(--blue); width: 16px; height: 16px; }
+  .modal-btns { display: flex; gap: 12px; margin-top: 20px; }
+  .modal-close-btn { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 14px; font-weight: 600; cursor: pointer; }
+  .modal-submit-btn { flex: 2; padding: 12px; border-radius: 8px; border: none; background: linear-gradient(135deg, var(--blue), #1d4ed8); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .modal-box::-webkit-scrollbar { width: 4px; }
+  .modal-box::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+  /* ===== PORTFOLIO ===== */
+  #portfolio { background: var(--bg-primary); }
+  .portfolio-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
+  .port-filter {
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-primary); padding: 10px 20px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; cursor: pointer; outline: none;
+  }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .portfolio-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; transition: all 0.25s; position: relative;
+  }
+  .portfolio-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .port-img { width: 100%; height: 160px; object-fit: cover; display: block; background: #111; }
+  .port-body { padding: 14px; }
+  .port-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .port-tag { font-size: 10px; color: var(--text-secondary); }
+  .port-overlay {
+    position:absolute; inset:0; background: rgba(0,0,0,0.85);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .portfolio-card:hover .port-overlay { opacity: 1; }
+  .port-view { color: var(--blue); font-size: 13px; font-weight: 600; text-decoration: none; border: 1px solid var(--blue); padding: 8px 18px; border-radius: 8px; }
+  .proof-section { margin-top: 40px; }
+  .proof-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 20px; }
+  .proof-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; text-align: center;
+  }
+  .proof-icon { font-size: 36px; margin-bottom: 10px; }
+  .proof-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .proof-link { color: var(--blue); font-size: 12px; text-decoration: none; }
+  .proof-link:hover { text-decoration: underline; }
+
+  /* ===== VIDEO SALES PROOF ===== */
+  #video-proof { background: var(--bg-secondary); overflow: hidden; }
+  .video-scroll-track { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; padding: 10px 4px; cursor: grab; }
+  .video-scroll-track::-webkit-scrollbar { display: none; }
+  .video-thumb {
+    position: relative; border-radius: 14px; overflow: hidden;
+    width: 300px; height: 200px; flex-shrink: 0;
+    background: var(--bg-card); border: 1px solid var(--border);
+    cursor: pointer; transition: all 0.25s;
+  }
+  .video-thumb:hover { border-color: rgba(59,130,246,0.4); transform: scale(1.02); }
+  .video-thumb iframe, .video-thumb video { width: 100%; height: 100%; border: none; object-fit: cover; }
+  .video-thumb .play-overlay {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background: rgba(0,0,0,0.4); transition: background 0.2s;
+  }
+  .video-thumb:hover .play-overlay { background: rgba(0,0,0,0.2); }
+  .play-btn {
+    width: 52px; height: 52px; background: rgba(255,255,255,0.9);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .play-btn svg { color: #000; margin-left: 4px; }
+  .video-label { position:absolute; bottom:10px; left:10px; font-size:11px; font-weight:600; color:#fff; background:rgba(0,0,0,0.7); border-radius:4px; padding:3px 8px; }
+
+  /* ===== TESTIMONIALS ===== */
+  #testimonials { background: var(--bg-primary); }
+  .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; }
+  .test-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; position: relative;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .test-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-3px); }
+  .test-card iframe { width: 100%; height: 200px; border: none; display: block; }
+  .test-vimeo { width: 100%; height: 200px; border: none; display: block; background: #000; }
+  .test-label { padding: 12px 14px; font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+  .view-more-sales {
+    margin-top: 30px; text-align: center;
+  }
+  .view-more-sales a {
+    display: inline-block; background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: #fff; padding: 14px 32px; border-radius: 10px; font-size: 14px;
+    font-weight: 700; text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 0 30px rgba(59,130,246,0.25);
+  }
+  .view-more-sales a:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(59,130,246,0.4); }
+
+  /* ===== TEAM ===== */
+  #team { background: var(--bg-secondary); }
+  .team-intro { color: var(--text-secondary); font-size: 15px; line-height: 1.8; max-width: 700px; margin-bottom: 40px; }
+  .team-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; }
+  .team-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 24px 18px; text-align: center;
+    transition: all 0.25s; position: relative;
+  }
+  .team-card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+  .team-avatar-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 14px; }
+  .team-avatar {
+    width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--border); background: #1a1a1a;
+    display: block;
+  }
+  .team-avatar-placeholder {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--emerald));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; font-weight: 700; color: #fff; border: 2px solid var(--border);
+  }
+  .verified-badge {
+    position: absolute; bottom: 0; right: 0;
+    width: 22px; height: 22px; background: var(--blue); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; border: 2px solid var(--bg-card);
+  }
+  .team-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .team-role { font-size: 11px; color: var(--blue); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .team-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+  .team-stars { font-size: 12px; margin-bottom: 10px; }
+  .team-actions { display: flex; gap: 8px; justify-content: center; }
+  .team-wa {
+    background: #25D366; color: #fff; border: none; border-radius: 8px;
+    padding: 7px 14px; font-size: 11px; font-weight: 600; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    transition: all 0.2s;
+  }
+  .team-wa:hover { background: #1aab52; }
+  .team-fiverr {
+    background: rgba(29,191,115,0.1); border: 1px solid rgba(29,191,115,0.3);
+    color: #1dbf73; border-radius: 8px; padding: 7px 10px;
+    font-size: 11px; font-weight: 600; text-decoration: none; display: inline-flex;
+    align-items: center; gap: 4px; transition: all 0.2s;
+  }
+  .team-fiverr:hover { background: rgba(29,191,115,0.2); }
+
+  /* ===== FOUNDER ===== */
+  #founder { background: var(--bg-primary); }
+  .founder-card {
+    max-width: 780px; margin: 0 auto;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 24px; padding: 48px; display: flex;
+    align-items: center; gap: 48px; position: relative; overflow: hidden;
+  }
+  .founder-card::before {
+    content:''; position:absolute; inset:-1px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(16,185,129,0.1), transparent);
+    border-radius: 24px; z-index:-1;
+  }
+  .founder-glow {
+    position:absolute; top:-40px; right:-40px; width:200px; height:200px;
+    background: radial-gradient(circle, rgba(59,130,246,0.2), transparent 70%);
+    pointer-events:none;
+  }
+  .founder-img-wrap { position: relative; flex-shrink: 0; }
+  .founder-img {
+    width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--blue); box-shadow: 0 0 40px rgba(59,130,246,0.3);
+  }
+  .founder-verified {
+    position:absolute; bottom:4px; right:4px; background: var(--blue);
+    border-radius: 50%; width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; border: 2px solid var(--bg-card);
+  }
+  .founder-info { flex: 1; }
+  .founder-name { font-family:'Syne',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+  .founder-title { color: var(--blue); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .founder-stars { color: var(--gold); font-size: 18px; margin-bottom: 14px; }
+  .founder-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; }
+  .founder-links { display: flex; gap: 12px; }
+
+  /* ===== CONTACT ===== */
+  #contact { background: var(--bg-secondary); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .contact-intro { font-size: 16px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 32px; }
+  .contact-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  .contact-method {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px; display: flex;
+    align-items: center; gap: 12px; text-decoration: none;
+    color: var(--text-primary); transition: all 0.2s;
+  }
+  .contact-method:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .cm-icon { font-size: 22px; }
+  .cm-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .cm-val { font-size: 13px; font-weight: 600; }
+  .response-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 8px; padding: 10px 16px; font-size: 13px;
+    color: var(--emerald); font-weight: 600;
+  }
+  .contact-form-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 32px; }
+  .contact-form-title { font-family:'Syne',sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .send-btn {
+    width: 100%; margin-top: 14px; padding: 14px;
+    background: linear-gradient(135deg, var(--blue), #1d4ed8);
+    color: #fff; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 0 30px rgba(59,130,246,0.25);
+  }
+  .send-btn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(59,130,246,0.4); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #000; border-top: 1px solid var(--border);
+    padding: 40px 5% 24px; text-align: center;
+  }
+  .footer-logo { margin-bottom: 16px; }
+  .footer-logo img { height: 34px; }
+  .footer-tagline { color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; }
+  .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 24px; flex-wrap: wrap; }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+  .footer-copy { color: #444; font-size: 12px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .metrics-grid { grid-template-columns: repeat(3,1fr); }
+    .team-grid { grid-template-columns: repeat(3,1fr); }
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .portfolio-grid { grid-template-columns: repeat(3,1fr); }
+    .rating-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: repeat(2,1fr); }
+    .team-grid { grid-template-columns: repeat(2,1fr); }
+    .metrics-grid { grid-template-columns: repeat(2,1fr); }
+    .skills-grid { grid-template-columns: repeat(2,1fr); }
+    .proof-grid { grid-template-columns: repeat(2,1fr); }
+    .test-grid { grid-template-columns: 1fr; }
+    .founder-card { flex-direction: column; text-align: center; padding: 32px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .contact-methods { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2,1fr); }
+    .conversion-row { grid-template-columns: 1fr; }
+    .about-stats { flex-direction: column; gap: 16px; }
+  }
+
+  /* ===== FADE IN ANIMATION ===== */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* REGION FLAGS */
+  .region-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px; color: var(--text-secondary);
+    font-weight: 500; margin: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- SECTION 1: TOP BANNER -->
+<div id="top-banner">
+  <div class="banner-inner">
+    <img src="https://www.image2url.com/r2/default/images/1781921782213-28be6011-e9cd-4b75-8c7b-f5eb7e220492.png" alt="Sage Solution Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+    <span style="display:none; font-family:'Syne',sans-serif; font-size:22px; font-weight:800; letter-spacing:1px;">SAGE SOLUTION</span>
+    <span class="banner-shopify-badge">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M15.337 23.979l7.216-1.561c0 0-2.612-17.668-2.631-17.794-.018-.126-.126-.208-.234-.208-.109 0-2.081-.146-2.081-.146s-1.382-1.345-1.526-1.49v21.199zM13.808 1.255s-1.146.352-2.864.874c0 0-1.453-4.177-3.988-4.177-5.753 0-8.526 7.186-8.526 11.04 0 2.955 1.562 4.53 3.588 4.53 1.634 0 2.93-.69 4.007-2.025.208 1.325.813 2.025 1.669 2.025 1.634 0 2.93-.69 4.007-2.025-.019 0 .019.019.019.019.181-5.285 2.175-9.44 2.088-10.261zm-6.39.544c-.653 0-1.143.463-1.143.997s.49.997 1.143.997c.654 0 1.144-.463 1.144-.997s-.49-.997-1.144-.997zm3.553-1.453l-1.833.563c-.453-1.307-1.107-2.552-2.3-2.552-.036 0-.072 0-.109.004 1.344-1.978 2.93-1.978 4.242 1.985zm-1.977 5.936c-.254-.218-.527-.417-.8-.617-.254-.181-.508-.363-.762-.544-.708.472-1.471.835-2.284.835-.49 0-.98-.163-1.235-.49-.036 0-.072 0-.109.004-1.091.29-1.816 1.471-1.816 2.544 0 1.453 1.016 2.1 2.067 2.1 1.345 0 2.5-.963 3.226-2.37.472.508.926 1.07 1.235 1.688.09-.163.145-.326.145-.49 0-1.071-.381-2.017-.663-2.66z"/></svg>
+      Shopify Experts
+    </span>
+  </div>
+</div>
+
+<!-- SECTION 2: NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <img src="https://www.image2url.com/r2/default/images/1781921782213-28be6011-e9cd-4b75-8c7b-f5eb7e220492.png" alt="Sage Solution" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<span style=&quot;font-family:Syne,sans-serif;font-size:18px;font-weight:800&quot;>SAGE</span>')">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://wa.link/cubji5" target="_blank" class="nav-cta">💬 WhatsApp Us</a>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div id="mobile-nav" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(5,5,5,0.97); z-index:9998; flex-direction:column; align-items:center; justify-content:center; gap:32px;">
+  <a href="#about" onclick="closeMobileNav()" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none;">About</a>
+  <a href="#services" onclick="closeMobileNav()" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none;">Services</a>
+  <a href="#reviews" onclick="closeMobileNav()" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none;">Reviews</a>
+  <a href="#portfolio" onclick="closeMobileNav()" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none;">Portfolio</a>
+  <a href="#team" onclick="closeMobileNav()" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none;">Team</a>
+  <a href="#contact" onclick="closeMobileNav()" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none;">Contact</a>
+  <button onclick="closeMobileNav()" style="margin-top:16px;background:none;border:1px solid #333;color:#888;padding:10px 28px;border-radius:8px;font-size:15px;cursor:pointer;">Close</button>
+</div>
+
+<!-- SECTION 3: HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left fade-in">
+      <div class="hero-tag"><span class="dot"></span> Elite Shopify Growth Agency</div>
+      <h1 class="hero-h1">Welcome to<br><span class="gradient-text">Sage Solution</span></h1>
+      <p class="hero-sub">We build, optimize, and market Shopify stores that convert browsers into buyers and buyers into loyal customers.</p>
+      <div class="hero-btns">
+        <a href="https://wa.link/cubji5" target="_blank" class="btn-primary">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Contact us on WhatsApp
+        </a>
+        <a href="#portfolio" class="btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          View Portfolio
+        </a>
+      </div>
+      <div class="trust-badges">
+        <div class="badge">
+          <svg width="14" height="14" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Shopify Experts
+        </div>
+        <div class="badge">
+          <svg width="14" height="14" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          500+ Projects Completed
+        </div>
+        <div class="badge">
+          <svg width="14" height="14" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Trusted Internationally
+        </div>
+        <div class="badge">
+          <svg width="14" height="14" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Ecommerce Growth Specialists
+        </div>
+      </div>
+    </div>
+    <!-- HERO DASHBOARD -->
+    <div class="hero-right fade-in" style="animation-delay:0.2s">
+      <div class="hero-dashboard">
+        <div class="dash-header">
+          <span class="dash-title">Store Analytics Dashboard</span>
+          <span class="dash-live">Live</span>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-label">Revenue</div>
+            <div class="kpi-val" style="color: var(--emerald);" id="kpi-rev">$0</div>
+            <div class="kpi-change up">↑ 34.2% MoM</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Orders</div>
+            <div class="kpi-val" style="color: var(--blue);" id="kpi-ord">0</div>
+            <div class="kpi-change up">↑ 28.7% MoM</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">CVR</div>
+            <div class="kpi-val" style="color: var(--gold);" id="kpi-cvr">0%</div>
+            <div class="kpi-change up">↑ 1.8%</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-title">Monthly Revenue Growth</div>
+          <div class="chart-bars" id="chart-bars">
+            <div class="bar" style="height:38%;background:linear-gradient(180deg,#3B82F6,#1d4ed8)"></div>
+            <div class="bar" style="height:52%;background:linear-gradient(180deg,#3B82F6,#1d4ed8)"></div>
+            <div class="bar" style="height:45%;background:linear-gradient(180deg,#3B82F6,#1d4ed8)"></div>
+            <div class="bar" style="height:63%;background:linear-gradient(180deg,#3B82F6,#1d4ed8)"></div>
+            <div class="bar" style="height:58%;background:linear-gradient(180deg,#3B82F6,#1d4ed8)"></div>
+            <div class="bar" style="height:75%;background:linear-gradient(180deg,#10B981,#059669)"></div>
+            <div class="bar" style="height:82%;background:linear-gradient(180deg,#10B981,#059669)"></div>
+            <div class="bar" style="height:71%;background:linear-gradient(180deg,#3B82F6,#1d4ed8)"></div>
+            <div class="bar" style="height:88%;background:linear-gradient(180deg,#10B981,#059669)"></div>
+            <div class="bar" style="height:95%;background:linear-gradient(180deg,#F59E0B,#d97706)"></div>
+            <div class="bar" style="height:100%;background:linear-gradient(180deg,#F59E0B,#d97706)"></div>
+            <div class="bar" style="height:94%;background:linear-gradient(180deg,#10B981,#059669)"></div>
+          </div>
+          <div class="bar-labels"><span class="bar-label">Jan</span><span class="bar-label">Feb</span><span class="bar-label">Mar</span><span class="bar-label">Apr</span><span class="bar-label">May</span><span class="bar-label">Jun</span><span class="bar-label">Jul</span><span class="bar-label">Aug</span><span class="bar-label">Sep</span><span class="bar-label">Oct</span><span class="bar-label">Nov</span><span class="bar-label">Dec</span></div>
+        </div>
+        <div class="conversion-row">
+          <div class="conv-card">
+            <div class="conv-metric">Avg. Order Value</div>
+            <div class="conv-val" style="color:var(--gold)">$147</div>
+            <div class="mini-progress"><div class="mini-bar" style="width:74%;background:var(--gold)"></div></div>
+          </div>
+          <div class="conv-card">
+            <div class="conv-metric">Customer Retention</div>
+            <div class="conv-val" style="color:var(--emerald)">67%</div>
+            <div class="mini-progress"><div class="mini-bar" style="width:67%;background:var(--emerald)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="collage-main">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Ecommerce Team">
+        </div>
+        <div class="collage-sub">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=350&q=80" alt="Analytics Dashboard">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=350&q=80" alt="Team Collaboration">
+        </div>
+      </div>
+      <div class="fade-in" style="animation-delay:0.15s">
+        <span class="section-label">About Sage Solution</span>
+        <h2 class="section-title">Global Ecommerce <span class="gradient-text">Growth Agency</span></h2>
+        <p class="about-text">Sage Solution is a global ecommerce growth agency built specifically for Shopify store owners who want long-term scalable revenue growth.</p>
+        <p class="about-text">Since 2019, our international team has helped ecommerce brands improve performance through Shopify development, store management, SEO, conversion optimization, technical optimization, paid marketing, customer acquisition, and growth systems designed for measurable business success.</p>
+        <div class="about-stats">
+          <div class="astat"><div class="astat-val">500+</div><div class="astat-lbl">Projects Completed</div></div>
+          <div class="astat"><div class="astat-val">5+</div><div class="astat-lbl">Years Experience</div></div>
+          <div class="astat"><div class="astat-val">400+</div><div class="astat-lbl">Happy Clients</div></div>
+        </div>
+        <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:6px;">
+          <span class="region-tag">🇺🇸 United States</span>
+          <span class="region-tag">🇬🇧 United Kingdom</span>
+          <span class="region-tag">🇳🇬 Nigeria</span>
+          <span class="region-tag">🇿🇦 South Africa</span>
+          <span class="region-tag">🌍 Africa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">Our Expertise</span>
+      <h2 class="section-title">Core <span class="gradient-text">Skills & Services</span></h2>
+      <p class="section-sub">20 specialized skill areas across Shopify development, marketing, and growth systems.</p>
+    </div>
+    <div class="skills-grid" id="skills-grid">
+    </div>
+    <button class="show-more-btn" id="skills-toggle" onclick="toggleSkills()">+14 More Skills</button>
+  </div>
+</section>
+
+<!-- SECTION 6: METRICS -->
+<section id="metrics" style="padding: 70px 5%;">
+  <div class="container">
+    <div class="metrics-grid">
+      <div class="metric-card fade-in">
+        <div class="metric-icon">🚀</div>
+        <div class="metric-val" data-target="500">0</div>
+        <div class="metric-lbl">Projects Completed</div>
+      </div>
+      <div class="metric-card fade-in" style="animation-delay:0.1s">
+        <div class="metric-icon">⏱️</div>
+        <div class="metric-val" data-target="5" data-suffix="+">0</div>
+        <div class="metric-lbl">Years Experience</div>
+      </div>
+      <div class="metric-card fade-in" style="animation-delay:0.2s">
+        <div class="metric-icon">😊</div>
+        <div class="metric-val" data-target="400">0</div>
+        <div class="metric-lbl">Happy Clients</div>
+      </div>
+      <div class="metric-card fade-in" style="animation-delay:0.3s">
+        <div class="metric-icon">📈</div>
+        <div class="metric-val" data-target="987" data-decimal="98.7">0</div>
+        <div class="metric-lbl">Success Rate</div>
+      </div>
+      <div class="metric-card fade-in" style="animation-delay:0.4s">
+        <div class="metric-icon">⭐</div>
+        <div class="metric-val" data-target="982" data-decimal="98.2">0</div>
+        <div class="metric-lbl">Shopify Recommended</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title">Premium <span class="gradient-text">Shopify Services</span></h2>
+      <p class="section-sub">End-to-end Shopify solutions built to scale your revenue and grow your brand globally.</p>
+    </div>
+    <div class="services-grid" id="services-grid"></div>
+  </div>
+</section>
+
+<!-- SECTION 8: SUCCESS RATING -->
+<section id="rating" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="fade-in" style="text-align:center; margin-bottom:10px;">
+      <span class="section-label">Performance</span>
+      <h2 class="section-title">Success <span class="gradient-text">Rating</span></h2>
+      <p class="section-sub" style="margin: 0 auto;">Our track record across Shopify services based on real client outcomes.</p>
+    </div>
+    <div class="rating-grid" id="rating-grid"></div>
+  </div>
+</section>
+
+<!-- SECTION 9: REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="fade-in" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;">
+      <div>
+        <span class="section-label">Client Feedback</span>
+        <h2 class="section-title">60+ <span class="gradient-text">Verified Reviews</span></h2>
+      </div>
+      <button class="write-review-btn" onclick="openModal()">✍️ Write Review</button>
+    </div>
+    <div class="reviews-track-wrap" id="reviews-track-wrap">
+      <div class="reviews-track" id="reviews-track"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEW MODAL -->
+<div class="modal-overlay" id="review-modal">
+  <div class="modal-box">
+    <h3 class="modal-title">✍️ Write Your Review</h3>
+    <div class="modal-grid">
+      <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="John Smith"></div>
+      <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-input" placeholder="@johnsmith"></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="john@email.com"></div>
+      <div class="form-group">
+        <label class="form-label">Country</label>
+        <select class="form-select">
+          <option value="">Select Country</option>
+          <option>🇺🇸 United States</option><option>🇬🇧 United Kingdom</option><option>🇦🇺 Australia</option><option>🇨🇦 Canada</option><option>🇳🇬 Nigeria</option><option>🇬🇭 Ghana</option><option>🇿🇦 South Africa</option><option>🇰🇪 Kenya</option><option>🇩🇪 Germany</option><option>🇫🇷 France</option><option>🇮🇹 Italy</option><option>🇪🇸 Spain</option><option>🇧🇷 Brazil</option><option>🇲🇽 Mexico</option><option>🇮🇳 India</option><option>🇵🇰 Pakistan</option><option>🇧🇩 Bangladesh</option><option>🇵🇭 Philippines</option><option>🇮🇩 Indonesia</option><option>🇲🇾 Malaysia</option><option>🇸🇬 Singapore</option><option>🇦🇪 UAE</option><option>🇸🇦 Saudi Arabia</option><option>🇳🇱 Netherlands</option><option>🇸🇪 Sweden</option>
+        </select>
+      </div>
+      <div class="form-group full"><label class="form-label">Star Rating</label><div class="star-input" id="star-input"><span onclick="setStars(1)">★</span><span onclick="setStars(2)">★</span><span onclick="setStars(3)">★</span><span onclick="setStars(4)">★</span><span onclick="setStars(5)">★</span></div></div>
+      <div class="form-group full"><label class="form-label">Review</label><textarea class="form-textarea" placeholder="Share your experience with Sage Solution..."></textarea></div>
+      <div class="form-group"><label class="form-label">Order Price</label><input type="text" class="form-input" placeholder="e.g. $250"></div>
+      <div class="form-group"><label class="form-label">Delivery Time</label><input type="text" class="form-input" placeholder="e.g. 3 days"></div>
+      <div class="form-group full"><label class="form-label">Service Type</label><select class="form-select"><option>Shopify Store Development</option><option>Dropshipping Store Creation</option><option>AI SEO</option><option>Store SEO</option><option>Product Listing</option><option>TikTok Shop</option><option>Error Fixing</option><option>Facebook & Instagram Ads</option><option>Pinterest & Google Ads</option></select></div>
+      <div class="form-group full"><label class="form-label">Profile Image</label><input type="file" class="form-input" accept="image/*"></div>
+      <div class="form-group full"><label class="form-check"><input type="checkbox"> I am a repeated client</label></div>
+      <div class="form-group full"><label class="form-check"><input type="checkbox" checked> Display publicly</label></div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-close-btn" onclick="closeModal()">Close</button>
+      <button class="modal-submit-btn" onclick="submitReview()">Submit Review</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 10: PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="fade-in" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; margin-bottom:30px;">
+      <div>
+        <span class="section-label">Our Work</span>
+        <h2 class="section-title">Featured <span class="gradient-text">Portfolio</span></h2>
+      </div>
+      <div class="portfolio-controls">
+        <select class="port-filter" onchange="filterPortfolio(this.value)">
+          <option value="all">Most Recent</option>
+          <option value="popular">Most Popular</option>
+          <option value="relevant">Most Relevant</option>
+        </select>
+      </div>
+    </div>
+    <div class="portfolio-grid" id="portfolio-grid"></div>
+    <div class="proof-section fade-in">
+      <h3 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px;">Performance Proof</h3>
+      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Real results backed by verified data from our client campaigns.</p>
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="proof-icon">💰</div>
+          <div class="proof-title">Sales Proof</div>
+          <p style="font-size:12px;color:var(--text-secondary);margin:6px 0 10px;">Verified store revenue screenshots from client Shopify dashboards.</p>
+          <a href="https://photos.app.goo.gl/nJcKKvuMh7B2CTn2A" target="_blank" class="proof-link">View Sales Proof →</a>
+        </div>
+        <div class="proof-card">
+          <div class="proof-icon">🔍</div>
+          <div class="proof-title">SEO Proof</div>
+          <p style="font-size:12px;color:var(--text-secondary);margin:6px 0 10px;">Google Search Console rankings and organic traffic growth evidence.</p>
+          <a href="https://photos.app.goo.gl/F7th5uX1ktAuh4t59" target="_blank" class="proof-link">View SEO Proof →</a>
+        </div>
+        <div class="proof-card">
+          <div class="proof-icon">📱</div>
+          <div class="proof-title">Facebook Ads Proof</div>
+          <p style="font-size:12px;color:var(--text-secondary);margin:6px 0 10px;">Real campaign results from Meta Ads Manager for client stores.</p>
+          <a href="https://photos.app.goo.gl/t9rHwVwtwQHDdArY6" target="_blank" class="proof-link">View FB Ads Proof →</a>
+        </div>
+        <div class="proof-card">
+          <div class="proof-icon">📊</div>
+          <div class="proof-title">Google Ads Proof</div>
+          <p style="font-size:12px;color:var(--text-secondary);margin:6px 0 10px;">Google Ads performance data showing ROAS and conversion metrics.</p>
+          <a href="https://photos.app.goo.gl/Jwz9ZgBayLdhwB427" target="_blank" class="proof-link">View Google Ads Proof →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: VIDEO SALES PROOF -->
+<section id="video-proof">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">Video Evidence</span>
+      <h2 class="section-title">Video Sales <span class="gradient-text">Proof</span></h2>
+      <p class="section-sub">Real screen recordings of client store results and revenue dashboards.</p>
+    </div>
+    <div class="video-scroll-track" id="video-proof-track">
+      <div class="video-thumb">
+        <iframe src="https://drive.google.com/file/d/1Pyexd_cJEcXW1Lmh0y6UD_nfPWl8-AtI/preview" allowfullscreen allow="autoplay"></iframe>
+        <div class="video-label">Sales Proof #1</div>
+      </div>
+      <div class="video-thumb">
+        <iframe src="https://drive.google.com/file/d/1E4ObpRpUr7MaQnweKIxJeb2M2MhFFXmf/preview" allowfullscreen allow="autoplay"></iframe>
+        <div class="video-label">Sales Proof #2</div>
+      </div>
+      <div class="video-thumb">
+        <iframe src="https://drive.google.com/file/d/1kvmZ1x2zZ-O1K55E1gf4wyTNiJcPoR-L/preview" allowfullscreen allow="autoplay"></iframe>
+        <div class="video-label">Sales Proof #3</div>
+      </div>
+      <div class="video-thumb">
+        <iframe src="https://drive.google.com/file/d/1pzaZf-IjokIGvF_yEZJozwORbaL69tFt/preview" allowfullscreen allow="autoplay"></iframe>
+        <div class="video-label">Sales Proof #4</div>
+      </div>
+      <div class="video-thumb">
+        <iframe src="https://drive.google.com/file/d/1K_79GFPrdkg-muDxHkQ8uI7rEiWxtLEB/preview" allowfullscreen allow="autoplay"></iframe>
+        <div class="video-label">Sales Proof #5</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: VIDEO TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">Client Testimonials</span>
+      <h2 class="section-title">Video <span class="gradient-text">Testimonials</span></h2>
+      <p class="section-sub">Hear directly from clients about their experience working with Sage Solution.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <iframe class="test-vimeo" src="https://drive.google.com/file/d/14DZC7KqHtEwEW_p4Ek7gN8Zlb5Y0J064/preview" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #1</div>
+      </div>
+      <div class="test-card">
+        <iframe class="test-vimeo" src="https://drive.google.com/file/d/1dJe9liKrIqFcTrNfZkGOiN4QF8Is5zdY/preview" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #2</div>
+      </div>
+      <div class="test-card">
+        <iframe class="test-vimeo" src="https://drive.google.com/file/d/1IEu5VbjXf2uZtb-VnExJsSenusv3zlQU/preview" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #3</div>
+      </div>
+      <div class="test-card">
+        <iframe class="test-vimeo" src="https://player.vimeo.com/video/1104190056" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #4</div>
+      </div>
+      <div class="test-card">
+        <iframe class="test-vimeo" src="https://player.vimeo.com/video/1104190161" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #5</div>
+      </div>
+      <div class="test-card">
+        <iframe class="test-vimeo" src="https://player.vimeo.com/video/1104189887" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #6</div>
+      </div>
+      <div class="test-card" style="grid-column:span 1">
+        <iframe class="test-vimeo" src="https://player.vimeo.com/video/1104190303" allowfullscreen></iframe>
+        <div class="test-label">📹 Client Testimonial #7</div>
+      </div>
+    </div>
+    <div class="view-more-sales">
+      <a href="https://photos.app.goo.gl/nJcKKvuMh7B2CTn2A" target="_blank">View More Store Sales Proof →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 13: TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">Our Global Team</span>
+      <h2 class="section-title">International <span class="gradient-text">Experts</span></h2>
+    </div>
+    <p class="team-intro">Our team operates across multiple continents — from the United States and United Kingdom to Nigeria, Johannesburg, Cape Town, and beyond. Each expert brings deep Shopify specialization and has delivered measurable growth for clients worldwide.</p>
+    <div class="team-grid" id="team-grid"></div>
+  </div>
+</section>
+
+<!-- SECTION 14: FOUNDER -->
+<section id="founder">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 40px;">
+      <span class="section-label">Leadership</span>
+      <h2 class="section-title">Meet the <span class="gradient-text">Founder</span></h2>
+    </div>
+    <div class="founder-card fade-in">
+      <div class="founder-glow"></div>
+      <div class="founder-img-wrap">
+        <img src="https://www.image2url.com/r2/default/files/1781972553333-9f947246-241c-48c5-8ab4-6d6ad002291c.png" alt="Michael Olajire" class="founder-img" onerror="this.src='https://ui-avatars.com/api/?name=MO&background=3B82F6&color=fff&size=130&bold=true'">
+        <div class="founder-verified">✓</div>
+      </div>
+      <div class="founder-info">
+        <div class="founder-name">Michael Olajire</div>
+        <div class="founder-title">Founder of Sage Solution</div>
+        <div class="founder-stars">★★★★★</div>
+        <p class="founder-desc">Michael Olajire founded Sage Solution and leads an international team of ecommerce specialists helping Shopify businesses scale through development, optimization, marketing, and technical growth systems.</p>
+        <div class="founder-links">
+          <a href="https://www.fiverr.com/michae1_olajire" target="_blank" class="team-fiverr">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M23.004 15.588a.995.995 0 10-1.99.01c.01.557.006 1.114-.007 1.671-.097 4.09-4.116 4.197-4.317 4.197-4.168.002-4.287-3.75-4.291-4.206V6.862h4.325a.995.995 0 100-1.99H12.4V3.105a.995.995 0 10-1.99 0v1.767H8.455a.995.995 0 100 1.99H10.41v10.473c.003.609.052 5.986 6.281 5.983.143 0 6.271-.006 6.312-6.039a.995.995 0 00.001-.281V15.588zM2.779 7.5c.985 0 1.765-.787 1.765-1.765 0-.984-.78-1.765-1.765-1.765-.977 0-1.765.78-1.765 1.765 0 .978.788 1.765 1.765 1.765zm-.99 13.54h1.98V9.617H1.789v11.424z"/></svg>
+            Fiverr
+          </a>
+          <a href="https://wa.link/cubji5" target="_blank" class="team-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 15: CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="fade-in">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="section-title">Let's <span class="gradient-text">Collaborate</span></h2>
+        <p class="contact-intro">Contact our support team before collaborating with any expert. We're here to answer any questions about your Shopify growth journey.</p>
+        <div class="contact-methods">
+          <a href="https://wa.link/cubji5" target="_blank" class="contact-method">
+            <span class="cm-icon">📱</span>
+            <div><div class="cm-label">WhatsApp</div><div class="cm-val">Chat with us</div></div>
+          </a>
+          <a href="mailto:michaellolajire03@gmail.com" class="contact-method">
+            <span class="cm-icon">📧</span>
+            <div><div class="cm-label">Email</div><div class="cm-val">michaellolajire03@gmail.com</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/michael-olajire-65a5842b6" target="_blank" class="contact-method">
+            <span class="cm-icon">💼</span>
+            <div><div class="cm-label">LinkedIn</div><div class="cm-val">Connect with us</div></div>
+          </a>
+          <a href="https://x.com/Sage_Glyph" target="_blank" class="contact-method">
+            <span class="cm-icon">𝕏</span>
+            <div><div class="cm-label">X (Twitter)</div><div class="cm-val">@Sage_Glyph</div></div>
+          </a>
+        </div>
+        <div class="response-badge">
+          <span>⚡</span> Average response time: <strong>Less than 1 hour</strong>
+        </div>
+      </div>
+      <div class="fade-in" style="animation-delay:0.15s">
+        <div class="contact-form-wrap">
+          <div class="contact-form-title">Send a Message</div>
+          <div class="form-row" style="margin-bottom:14px;">
+            <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" placeholder="Your Name"></div>
+            <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+          </div>
+          <div class="form-group" style="margin-bottom:14px;"><label class="form-label">Message</label><textarea class="form-textarea" style="min-height:120px;" placeholder="Tell us about your project..."></textarea></div>
+          <button class="send-btn" onclick="sendMessage()">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://www.image2url.com/r2/default/images/1781921782213-28be6011-e9cd-4b75-8c7b-f5eb7e220492.png" alt="Sage Solution" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span style="display:none;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;">SAGE SOLUTION</span>
+  </div>
+  <div class="footer-tagline">Global Shopify Growth Agency — Building Revenue-Driven Ecommerce Stores Since 2019</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.link/cubji5" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2024 Sage Solution. All rights reserved. Premium Shopify Growth Agency.</div>
+</footer>
+
+<script>
+// ===== DATA =====
+const skillsData = [
+  {name:'Shopify Development', icon:'🛍️', bg:'rgba(59,130,246,0.1)'},
+  {name:'Shopify Dropshipping', icon:'📦', bg:'rgba(16,185,129,0.1)'},
+  {name:'Website Design', icon:'🎨', bg:'rgba(245,158,11,0.1)'},
+  {name:'Website Redesign', icon:'✨', bg:'rgba(59,130,246,0.1)'},
+  {name:'Shopify SEO', icon:'🔍', bg:'rgba(16,185,129,0.1)'},
+  {name:'Page Optimization', icon:'⚡', bg:'rgba(245,158,11,0.1)'},
+  {name:'CRO', icon:'📈', bg:'rgba(59,130,246,0.1)'},
+  {name:'Product Listing', icon:'🏷️', bg:'rgba(16,185,129,0.1)'},
+  {name:'Facebook Sales Channel', icon:'👥', bg:'rgba(245,158,11,0.1)'},
+  {name:'Instagram Sales Channel', icon:'📸', bg:'rgba(59,130,246,0.1)'},
+  {name:'Pinterest Marketing', icon:'📌', bg:'rgba(16,185,129,0.1)'},
+  {name:'TikTok Marketing', icon:'🎵', bg:'rgba(245,158,11,0.1)'},
+  {name:'Email Marketing', icon:'📧', bg:'rgba(59,130,246,0.1)'},
+  {name:'Store Speed Optimization', icon:'🚀', bg:'rgba(16,185,129,0.1)'},
+  {name:'Google Ads', icon:'🎯', bg:'rgba(245,158,11,0.1)'},
+  {name:'Facebook Ads', icon:'💡', bg:'rgba(59,130,246,0.1)'},
+  {name:'Store Management', icon:'🏪', bg:'rgba(16,185,129,0.1)'},
+  {name:'AI Search Optimization', icon:'🤖', bg:'rgba(245,158,11,0.1)'},
+  {name:'Technical Optimization', icon:'🔧', bg:'rgba(59,130,246,0.1)'},
+  {name:'Ecommerce Strategy', icon:'♟️', bg:'rgba(16,185,129,0.1)'},
+];
+
+const servicesData = [
+  {title:'Shopify Store Development', price:'$150 – $300', img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaN2Y5QroR-SonNIiLQtfFXehSVfpTbD48zGaqspSpkeVq5v6DYED1EVjw&s=10', icon:'🛍️', desc:'Full Shopify store build from scratch with premium theme, product setup, payment integration, and launch-ready configuration.', experts:7},
+  {title:'Dropshipping Store Creation', price:'$250 – $400', img:'https://www.image2url.com/r2/default/images/1781925226190-37dbf5d5-e3ca-40ab-905c-7fa4e58c279c.png', icon:'📦', desc:'Automated dropshipping stores with supplier integration, winning products, and high-converting product pages.', experts:5},
+  {title:'AI SEO', price:'$450', img:'https://www.image2url.com/r2/default/images/1781926131712-97cbace6-2b6f-4f2a-8bcd-4f91aabac01f.png', icon:'🤖', desc:'Next-generation AI-powered SEO optimization targeting AI search engines, Google SGE, and voice search for maximum discoverability.', experts:3},
+  {title:'Store SEO', price:'$360 – $600', img:'https://www.image2url.com/r2/default/images/1781925854095-6bef907e-4350-4049-a4de-0549e3b9df6c.png', icon:'🔍', desc:'Comprehensive on-page and technical SEO for Shopify stores — keyword strategy, meta optimization, schema markup, and content SEO.', experts:6},
+  {title:'Product Listing', price:'$95', img:'https://www.image2url.com/r2/default/images/1781926290144-3582223e-86b0-4585-97af-57e82bac6f99.png', icon:'🏷️', desc:'Professional product listing with SEO-optimized titles, descriptions, tags, variants, and high-quality image uploads.', experts:9},
+  {title:'TikTok Shop', price:'$380', img:'https://www.image2url.com/r2/default/images/1781926507462-a57c0194-c99b-4b29-a263-f3f5d451b1ac.png', icon:'🎵', desc:'Full TikTok Shop setup, product sync, affiliate program activation, and viral content strategy for rapid social commerce growth.', experts:4},
+  {title:'Error Fixing', price:'$150 – $350', img:'https://www.image2url.com/r2/default/images/1781926906245-569a7d89-9a0e-4f84-9a8e-954d512cc855.png', icon:'🔧', desc:'Expert diagnosis and resolution of Shopify bugs, broken layouts, app conflicts, checkout issues, and speed problems.', experts:8},
+  {title:'Facebook & Instagram Ads', price:'$260', img:'https://www.image2url.com/r2/default/images/1781927670198-d954c7e5-b7cc-423f-8589-ccf85314861a.png', icon:'📱', desc:'High-ROI Meta advertising campaigns with audience targeting, creative strategy, A/B testing, and conversion tracking setup.', experts:6},
+  {title:'Pinterest & Google Ads', price:'$200 – $350', img:'https://www.image2url.com/r2/default/files/1781928043597-17683fe9-a51d-4284-9a61-cae88964e4b3.png', icon:'🎯', desc:'Profitable Pinterest Shopping and Google Shopping campaigns driving qualified traffic with measurable return on ad spend.', experts:5},
+];
+
+const portfolioData = [
+  {title:"L'essence", tag:'Luxury Fashion', url:'https://lessence.us', img:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=80'},
+  {title:'Wolf Circus', tag:'Jewellery Brand', url:'https://www.wolfcircus.com', img:'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80'},
+  {title:'Home Goods DSL', tag:'Home Décor', url:'https://homegoodsdsl.com', img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'},
+  {title:'Click & Mortar', tag:'General Commerce', url:'https://yourclickandmortar.com', img:'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&q=80'},
+  {title:'Divine Soul', tag:'Spiritual Wellness', url:'https://divinesoul.store', img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80'},
+  {title:'Premium Fashion', tag:'Shopify Store', url:'#', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'},
+  {title:'Electronics Hub', tag:'Dropshipping', url:'#', img:'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&q=80'},
+  {title:'Beauty Brand', tag:'Cosmetics', url:'#', img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80'},
+  {title:'Fitness Store', tag:'Health & Fitness', url:'#', img:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80'},
+  {title:'Pet Supplies', tag:'Pet Products', url:'#', img:'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=80'},
+  {title:'Kids Fashion', tag:'Children\'s Wear', url:'#', img:'https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=400&q=80'},
+  {title:'Organic Foods', tag:'Health Food', url:'#', img:'https://images.unsplash.com/photo-1543257580-7269da773bf5?w=400&q=80'},
+  {title:'Tech Gadgets', tag:'Consumer Tech', url:'#', img:'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80'},
+  {title:'Sports Brand', tag:'Athletic Wear', url:'#', img:'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=80'},
+  {title:'Candle Store', tag:'Home Fragrance', url:'#', img:'https://images.unsplash.com/photo-1607435097405-c4e8e12e2f4f?w=400&q=80'},
+  {title:'Furniture Shop', tag:'Interior Design', url:'#', img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'},
+  {title:'Book Store', tag:'Books & Media', url:'#', img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80'},
+  {title:'Coffee Brand', tag:'Beverages', url:'#', img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80'},
+  {title:'Skincare Brand', tag:'Beauty & Care', url:'#', img:'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80'},
+  {title:'Accessories Shop', tag:'Fashion Accessories', url:'#', img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80'},
+  {title:'Garden Store', tag:'Outdoor & Garden', url:'#', img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80'},
+  {title:'Art Gallery', tag:'Digital Art', url:'#', img:'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&q=80'},
+  {title:'Toy Shop', tag:'Kids & Toys', url:'#', img:'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=400&q=80'},
+  {title:'Music Store', tag:'Music & Audio', url:'#', img:'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&q=80'},
+  {title:'Travel Gear', tag:'Adventure & Travel', url:'#', img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&q=80'},
+];
+
+const reviewsData = [
+  {name:'Sarah Mitchell', username:'@sarahm_us', country:'🇺🇸 United States', service:'Shopify Store Development', text:'Sage Solution completely transformed our online store. Revenue doubled in the first month after launch. The team understood our brand perfectly and delivered exceptional quality.', rating:5, initials:'SM'},
+  {name:'James Okonkwo', username:'@jamesko', country:'🇬🇧 United Kingdom', service:'Facebook & Instagram Ads', text:'Our ROAS went from 1.8x to 4.2x within 6 weeks. The campaign strategy was spot-on and they were incredibly responsive throughout the process.', rating:5, initials:'JO'},
+  {name:'Priya Sharma', username:'@priyas', country:'🇮🇳 India', service:'Store SEO', text:'Within 3 months, we went from page 5 to page 1 on Google for our main keywords. Traffic increased by 340%. Truly exceptional work.', rating:5, initials:'PS'},
+  {name:'David Chen', username:'@davidc_sg', country:'🇸🇬 Singapore', service:'Shopify Store Development', text:'Professional, fast, and incredibly talented. They built our store in record time and it looks better than anything I could have imagined. Highly recommend!', rating:5, initials:'DC'},
+  {name:'Amina Hassan', username:'@aminah', country:'🇳🇬 Nigeria', service:'Dropshipping Store Creation', text:'Best investment I made for my business. The dropshipping store they built is absolutely stunning and generates consistent sales daily.', rating:5, initials:'AH'},
+  {name:'Tom Bergmann', username:'@tomberg', country:'🇩🇪 Germany', service:'TikTok Shop', text:'They set up our TikTok Shop and within weeks we had thousands of impressions. Sales from TikTok now account for 30% of our revenue!', rating:5, initials:'TB'},
+  {name:'Chioma Eze', username:'@chioma_e', country:'🇳🇬 Nigeria', service:'Product Listing', text:'Over 200 products listed with perfect SEO optimization. Every product page looks professional and search rankings improved dramatically.', rating:5, initials:'CE'},
+  {name:'Marcus Johnson', username:'@marcusj', country:'🇺🇸 United States', service:'CRO', text:'They increased our conversion rate from 1.2% to 3.8%. That tripled our revenue without increasing ad spend. Absolutely worth every dollar.', rating:5, initials:'MJ'},
+  {name:'Lisa Thompson', username:'@lisath', country:'🇦🇺 Australia', service:'Google Ads', text:'Our Google Shopping campaigns now run at 6x ROAS consistently. The team knows exactly what they\'re doing with paid advertising.', rating:5, initials:'LT'},
+  {name:'Kwame Asante', username:'@kwamea', country:'🇬🇭 Ghana', service:'Shopify Store Development', text:'Incredible work! They built a world-class Shopify store that rivals international competitors. Our customers constantly compliment the design.', rating:5, initials:'KA'},
+  {name:'Emily Rodriguez', username:'@emilyr', country:'🇲🇽 Mexico', service:'Email Marketing', text:'Our email open rates went from 12% to 38%. The automation sequences they built generate passive revenue every single day.', rating:5, initials:'ER'},
+  {name:'Ben Okafor', username:'@benokafor', country:'🇳🇬 Nigeria', service:'AI SEO', text:'AI SEO is next level. We\'re now appearing in AI search results and Google SGE. Organic traffic up 280% in 90 days.', rating:5, initials:'BO'},
+  {name:'Hannah Wright', username:'@hannahw', country:'🇬🇧 United Kingdom', service:'Store Speed Optimization', text:'Our store loaded in 8 seconds before. Now it loads in 1.4 seconds. Bounce rate dropped 45% and conversions improved significantly.', rating:5, initials:'HW'},
+  {name:'Femi Adeyemi', username:'@femiadey', country:'🇳🇬 Nigeria', service:'Shopify Store Development', text:'Top-tier quality work. The attention to detail is remarkable. Every section was perfectly crafted and delivered ahead of schedule.', rating:5, initials:'FA'},
+  {name:'Carlos Mendez', username:'@carlosm', country:'🇧🇷 Brazil', service:'Dropshipping Store Creation', text:'My dropshipping business is now making $8,000/month after Sage Solution built and optimized everything. Life-changing results!', rating:5, initials:'CM'},
+  {name:'Aisha Yusuf', username:'@aishay', country:'🇰🇪 Kenya', service:'Pinterest Marketing', text:'Pinterest traffic now drives 25% of our total store visits. The strategy they created is brilliant and highly targeted.', rating:5, initials:'AY'},
+  {name:'Tyler Adams', username:'@tylera', country:'🇺🇸 United States', service:'Error Fixing', text:'They fixed 15 critical Shopify errors in one day. Our checkout was broken for weeks and they solved everything quickly and professionally.', rating:5, initials:'TA'},
+  {name:'Ngozi Obi', username:'@ngoziobi', country:'🇳🇬 Nigeria', service:'Website Redesign', text:'The redesign exceeded every expectation. Our old site looked amateur. Now it looks like a Fortune 500 company website.', rating:5, initials:'NO'},
+  {name:'Jordan Lee', username:'@jordanl', country:'🇨🇦 Canada', service:'Facebook & Instagram Ads', text:'$50K in sales from our first Meta campaign they managed. The targeting and creative strategy are on another level.', rating:5, initials:'JL'},
+  {name:'Bola Adewale', username:'@bolaa', country:'🇳🇬 Nigeria', service:'Store Management', text:'They manage our entire store operations seamlessly. Product launches, inventory, customer service — all handled professionally.', rating:5, initials:'BA'},
+  {name:'Sophie Laurent', username:'@sophiel', country:'🇫🇷 France', service:'Store SEO', text:'Sage Solution put us on the map in European markets. Our French and UK Google rankings improved dramatically within 2 months.', rating:5, initials:'SL'},
+  {name:'Michael Dike', username:'@mikedike', country:'🇿🇦 South Africa', service:'Ecommerce Strategy', text:'The growth strategy they developed for our brand was comprehensive and effective. Revenue grew 180% year-over-year following their plan.', rating:5, initials:'MD'},
+  {name:'Rebecca Kim', username:'@rebeccak', country:'🇸🇬 Singapore', service:'TikTok Shop', text:'TikTok Shop is now our #1 revenue channel. They set everything up, trained our team, and results speak for themselves.', rating:5, initials:'RK'},
+  {name:'Chukwu Nwosu', username:'@chukwun', country:'🇳🇬 Nigeria', service:'Shopify Store Development', text:'Absolutely masterful work. The Shopify store they built is fast, beautiful, and converts exceptionally well. Five stars without hesitation.', rating:5, initials:'CN'},
+  {name:'Anna Petrov', username:'@annap', country:'🇸🇪 Sweden', service:'Google Ads', text:'Our Google Shopping campaigns were losing money before. Sage Solution restructured everything and we\'re now at 5.2x ROAS.', rating:5, initials:'AP'},
+  {name:'Oluwaseun Bello', username:'@seunable', country:'🇳🇬 Nigeria', service:'AI SEO', text:'They positioned us for the future of search. Our products now appear in AI overviews and voice search results. Revolutionary service.', rating:5, initials:'OB'},
+  {name:'Grace Adichie', username:'@graceadi', country:'🇳🇬 Nigeria', service:'Product Listing', text:'100 products listed with exceptional quality. Every description is SEO-optimized and our organic product traffic increased by 200%.', rating:5, initials:'GA'},
+  {name:'Daniel Foster', username:'@danfoster', country:'🇺🇸 United States', service:'CRO', text:'Our abandoned cart recovery improved by 60% after their optimization. The checkout flow redesign alone paid for itself 10x over.', rating:5, initials:'DF'},
+  {name:'Fatima Al-Rashid', username:'@fatimarar', country:'🇦🇪 UAE', service:'Shopify Store Development', text:'Premium quality that matches our luxury brand positioning. Every pixel is perfect. Our international customers are truly impressed.', rating:5, initials:'FR'},
+  {name:'Ikechukwu Obi', username:'@ikeobi', country:'🇳🇬 Nigeria', service:'Store Speed Optimization', text:'Lighthouse score went from 23 to 97. The technical work they did was incredibly thorough and the results were immediate.', rating:5, initials:'IO'},
+];
+
+const teamData = [
+  {
+    name:'Michael Olajire', role:'Lead Developer',
+    img:'https://www.image2url.com/r2/default/files/1781972553333-9f947246-241c-48c5-8ab4-6d6ad002291c.png',
+    desc:'Shopify expert and agency founder with 5+ years building high-converting ecommerce stores globally.',
+    stars:'★★★★★', starColor:'#87f502',
+    wa:'https://wa.link/cubji5',
+    fiverr:'https://www.fiverr.com/michae1_olajire',
+    verified:true
+  },
+  {
+    name:'Timi Oladunjoye', role:'Project Manager',
+    img:'https://www.image2url.com/r2/default/files/1781975254786-3bb68a88-aa4e-46ab-91e4-b14c3526b28a.jpg',
+    desc:'Experienced project manager ensuring every client delivery is on time, on budget, and above expectations.',
+    stars:'★★★★★', starColor:'#F59E0B',
+    wa:'mailto:oladunjoyemalik5@gmail.com',
+    verified:true
+  },
+  {
+    name:'DeTruth', role:'Project Manager & Marketing',
+    img:'', initials:'DT',
+    desc:'Dual-role specialist in project coordination and digital marketing strategy for Shopify growth campaigns.',
+    stars:'★★★★★', starColor:'#F59E0B',
+    wa:'https://wa.link/cubji5',
+    fiverr:'https://www.fiverr.com/dreal_detruth',
+    verified:true
+  },
+  {
+    name:'Michy', role:'Backend Developer',
+    img:'https://www.image2url.com/r2/default/images/1782248757353-fd08206d-9021-41cc-9459-79f49b2f128e.png',
+    desc:'Technical optimization specialist focused on Shopify backend development, speed, and performance engineering.',
+    stars:'★★★★★', starColor:'#F59E0B',
+    wa:'https://wa.link/cubji5',
+    fiverr:'https://www.fiverr.com/michyblake',
+    verified:true
+  },
+  {
+    name:'Bams', role:'Marketer',
+    img:'https://www.image2url.com/r2/default/images/1782248251594-f4cc29fd-3492-40de-8f8f-49a86395d3fe.png',
+    desc:'Performance marketing specialist driving paid social, Google Ads, and influencer campaigns for Shopify stores.',
+    stars:'★★★★★', starColor:'#F59E0B',
+    wa:'https://wa.link/cubji5',
+    fiverr:'https://www.fiverr.com/d_bams',
+    verified:true
+  },
+];
+
+const ratingsData = [
+  {label:'Shopify Development', pct:99, color:'#3B82F6'},
+  {label:'Shopify Optimization', pct:99, color:'#10B981'},
+  {label:'Shopify Marketing', pct:95, color:'#F59E0B'},
+  {label:'Client Support', pct:99, color:'#8B5CF6'},
+];
+
+// ===== RENDER FUNCTIONS =====
+function renderSkills() {
+  const grid = document.getElementById('skills-grid');
+  skillsData.forEach((s, i) => {
+    const hidden = i >= 6 ? 'hidden-skill' : '';
+    grid.innerHTML += `<div class="skill-card ${hidden} fade-in" style="animation-delay:${(i%6)*0.06}s">
+      <div class="skill-icon" style="background:${s.bg}">${s.icon}</div>
+      <span class="skill-name">${s.name}</span>
+    </div>`;
+  });
+}
+
+let skillsShown = false;
+function toggleSkills() {
+  const hidden = document.querySelectorAll('.hidden-skill');
+  const btn = document.getElementById('skills-toggle');
+  if (!skillsShown) {
+    hidden.forEach(el => { el.style.display = 'flex'; el.classList.add('visible'); });
+    btn.textContent = '− Show Less';
+    skillsShown = true;
+  } else {
+    hidden.forEach(el => el.style.display = 'none');
+    btn.textContent = '+14 More Skills';
+    skillsShown = false;
+  }
+}
+
+function renderServices() {
+  const grid = document.getElementById('services-grid');
+  servicesData.forEach(s => {
+    grid.innerHTML += `<div class="service-card fade-in">
+      <img src="${s.img}" alt="${s.title}" class="service-img" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=60'">
+      <div class="service-body">
+        <div class="service-icon-row">
+          <span class="service-ico">${s.icon}</span>
+          <span class="service-experts">👥 ${s.experts} Experts Available</span>
+        </div>
+        <div class="service-title">${s.title}</div>
+        <div class="service-desc">${s.desc}</div>
+        <div class="service-footer">
+          <span class="service-price">${s.price}</span>
+          <span class="consult-badge">📹 Video Consult</span>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+function renderPortfolio() {
+  const grid = document.getElementById('portfolio-grid');
+  portfolioData.forEach(p => {
+    const linkAttr = p.url !== '#' ? `href="${p.url}" target="_blank"` : 'href="#"';
+    grid.innerHTML += `<div class="portfolio-card fade-in">
+      <img src="${p.img}" alt="${p.title}" class="port-img" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=60'">
+      <div class="port-body">
+        <div class="port-title">${p.title}</div>
+        <div class="port-tag">${p.tag}</div>
+      </div>
+      <div class="port-overlay"><a ${linkAttr} class="port-view">View Project →</a></div>
+    </div>`;
+  });
+}
+
+function filterPortfolio(val) {
+  const cards = document.querySelectorAll('.portfolio-card');
+  cards.forEach((c, i) => {
+    c.style.order = val === 'popular' ? (cards.length - i) : i;
+  });
+}
+
+function renderRatings() {
+  const grid = document.getElementById('rating-grid');
+  ratingsData.forEach(r => {
+    const circ = 2 * Math.PI * 54;
+    const offset = circ - (r.pct / 100) * circ;
+    grid.innerHTML += `<div class="rating-item fade-in">
+      <div class="circle-wrap">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle class="circle-bg" cx="70" cy="70" r="54"/>
+          <circle class="circle-fg" cx="70" cy="70" r="54"
+            stroke="${r.color}"
+            stroke-dasharray="${circ}"
+            stroke-dashoffset="${circ}"
+            data-offset="${offset}"
+            style="transition: stroke-dashoffset 1.5s ease;"/>
+        </svg>
+        <div class="circle-pct" style="color:${r.color}">${r.pct}%</div>
+      </div>
+      <div class="rating-label">${r.label}</div>
+      <div class="rating-sub">Client Satisfaction Score</div>
+    </div>`;
+  });
+}
+
+function renderReviews() {
+  const track = document.getElementById('reviews-track');
+  reviewsData.forEach(r => {
+    const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
+    track.innerHTML += `<div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#3B82F6,#10B981)">${r.initials}</div>
+        <div class="review-info">
+          <div class="review-name">${r.name}</div>
+          <div class="review-meta">${r.country}</div>
+        </div>
+      </div>
+      <div class="review-stars">${stars}</div>
+      <div class="review-service">${r.service}</div>
+      <div class="review-text">${r.text}</div>
+    </div>`;
+  });
+  enableDragScroll('reviews-track-wrap');
+}
+
+function renderTeam() {
+  const grid = document.getElementById('team-grid');
+  teamData.forEach(m => {
+    const avatarHtml = m.img
+      ? `<img src="${m.img}" alt="${m.name}" class="team-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const placeholderStyle = m.img ? 'display:none' : 'display:flex';
+    const fiverrBtn = m.fiverr ? `<a href="${m.fiverr}" target="_blank" class="team-fiverr">
+      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M23.004 15.588a.995.995 0 10-1.99.01c.01.557.006 1.114-.007 1.671-.097 4.09-4.116 4.197-4.317 4.197-4.168.002-4.287-3.75-4.291-4.206V6.862h4.325a.995.995 0 100-1.99H12.4V3.105a.995.995 0 10-1.99 0v1.767H8.455a.995.995 0 100 1.99H10.41v10.473c.003.609.052 5.986 6.281 5.983.143 0 6.271-.006 6.312-6.039a.995.995 0 00.001-.281V15.588zM2.779 7.5c.985 0 1.765-.787 1.765-1.765 0-.984-.78-1.765-1.765-1.765-.977 0-1.765.78-1.765 1.765 0 .978.788 1.765 1.765 1.765zm-.99 13.54h1.98V9.617H1.789v11.424z"/></svg>
+      Fiverr
+    </a>` : '';
+    const waHref = m.wa.startsWith('mailto') ? m.wa : m.wa;
+    grid.innerHTML += `<div class="team-card fade-in">
+      <div class="team-avatar-wrap">
+        ${avatarHtml}
+        <div class="team-avatar-placeholder" style="${placeholderStyle}">${m.initials || m.name[0]}</div>
+        ${m.verified ? '<div class="verified-badge">✓</div>' : ''}
+      </div>
+      <div class="team-name">${m.name}</div>
+      <div class="team-role">${m.role}</div>
+      <div class="team-desc">${m.desc}</div>
+      <div class="team-stars" style="color:${m.starColor || '#F59E0B'}">${m.stars}</div>
+      <div class="team-actions">
+        <a href="${waHref}" target="_blank" class="team-wa">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        ${fiverrBtn}
+      </div>
+    </div>`;
+  });
+}
+
+// ===== COUNTERS =====
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const decimal = el.dataset.decimal;
+  const suffix = el.dataset.suffix || (target >= 100 ? '+' : '');
+  let start = 0;
+  const duration = 1800;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) {
+      clearInterval(timer);
+      el.textContent = decimal ? decimal + '%' : target + suffix;
+    } else {
+      el.textContent = decimal
+        ? (decimal * (start/target)).toFixed(1) + '%'
+        : Math.floor(start) + suffix;
+    }
+  }, 16);
+}
+
+// ===== KPI ANIMATION =====
+function animateKPI() {
+  let rev = 0, ord = 0, cvr = 0;
+  const t = setInterval(() => {
+    rev += 1247; ord += 3; cvr += 0.08;
+    if (rev >= 48700) { clearInterval(t); rev=48700; ord=147; cvr=3.2; }
+    document.getElementById('kpi-rev').textContent = '$' + rev.toLocaleString();
+    document.getElementById('kpi-ord').textContent = Math.floor(ord);
+    document.getElementById('kpi-cvr').textContent = cvr.toFixed(1) + '%';
+  }, 16);
+}
+
+// ===== DRAG SCROLL =====
+function enableDragScroll(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let down = false, startX, scrollLeft;
+  el.addEventListener('mousedown', e => { down=true; startX=e.pageX-el.offsetLeft; scrollLeft=el.scrollLeft; el.style.cursor='grabbing'; });
+  el.addEventListener('mouseleave', () => { down=false; el.style.cursor='grab'; });
+  el.addEventListener('mouseup', () => { down=false; el.style.cursor='grab'; });
+  el.addEventListener('mousemove', e => { if(!down) return; e.preventDefault(); const x=e.pageX-el.offsetLeft; el.scrollLeft=scrollLeft-(x-startX); });
+}
+
+// ===== VIDEO DRAG =====
+function enableVideoDrag(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let down=false, startX, scrollLeft;
+  el.addEventListener('mousedown', e => { down=true; startX=e.pageX-el.offsetLeft; scrollLeft=el.scrollLeft; el.style.cursor='grabbing'; });
+  el.addEventListener('mouseleave', () => { down=false; el.style.cursor='grab'; });
+  el.addEventListener('mouseup', () => { down=false; el.style.cursor='grab'; });
+  el.addEventListener('mousemove', e => { if(!down) return; e.preventDefault(); const x=e.pageX-el.offsetLeft; el.scrollLeft=scrollLeft-(x-startX); });
+}
+
+// ===== MODAL =====
+let stars = 5;
+function openModal() { document.getElementById('review-modal').classList.add('open'); setStars(5); }
+function closeModal() { document.getElementById('review-modal').classList.remove('open'); }
+function setStars(n) {
+  stars = n;
+  document.querySelectorAll('#star-input span').forEach((s,i) => {
+    s.classList.toggle('active', i < n);
+  });
+}
+function submitReview() {
+  alert('Thank you for your review! It will be published after verification.');
+  closeModal();
+}
+document.getElementById('review-modal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+// ===== CONTACT FORM =====
+function sendMessage() {
+  const inputs = document.querySelectorAll('#contact .form-input, #contact .form-textarea');
+  let valid = true;
+  inputs.forEach(i => { if(!i.value.trim()) valid = false; });
+  if (!valid) { alert('Please fill in all fields.'); return; }
+  alert('Message sent! We will respond within 1 hour.');
+  inputs.forEach(i => i.value = '');
+}
+
+// ===== NAV SCROLL =====
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('main-nav');
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// ===== INTERSECTION OBSERVER =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate counters
+      if (entry.target.classList.contains('metric-card')) {
+        const val = entry.target.querySelector('.metric-val');
+        if (val && !val.dataset.animated) { val.dataset.animated = '1'; animateCounter(val); }
+      }
+      // Animate circles
+      if (entry.target.classList.contains('rating-item')) {
+        const fg = entry.target.querySelector('.circle-fg');
+        if (fg && !fg.dataset.animated) {
+          fg.dataset.animated = '1';
+          setTimeout(() => { fg.style.strokeDashoffset = fg.dataset.offset; }, 100);
+        }
+      }
+    }
+  });
+}, { threshold: 0.15 });
+
+// ===== MOBILE NAV =====
+function toggleMobileNav() {
+  const mn = document.getElementById('mobile-nav');
+  mn.style.display = mn.style.display === 'flex' ? 'none' : 'flex';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-nav').style.display = 'none';
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  renderSkills();
+  renderServices();
+  renderPortfolio();
+  renderRatings();
+  renderReviews();
+  renderTeam();
+  animateKPI();
+  enableVideoDrag('video-proof-track');
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Re-observe after dynamic renders
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  }, 200);
+});
+</script>
+</body>
+</html>
